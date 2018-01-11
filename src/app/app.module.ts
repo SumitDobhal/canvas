@@ -16,6 +16,7 @@ import { CanvasDrawComponent} from '../components/canvas-draw/canvas-draw';
 
 //plugins start 
 import { Camera } from '@ionic-native/camera';
+import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media';
 //plugins ends
 
 @NgModule({
@@ -39,7 +40,8 @@ import { Camera } from '@ionic-native/camera';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    Camera
+    Camera,
+    StreamingMedia
   ]
 })
 export class AppModule {}
