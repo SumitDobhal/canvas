@@ -21,6 +21,11 @@ export class CanvasDrawComponent {
   text: string;
   ctx :any;
 
+  drag:number;
+  firstX  :number;
+  firstY  :number;
+  fromMove:string;
+
   imagenew:string;
   constructor(
               public rendrer :Renderer,
@@ -38,16 +43,24 @@ export class CanvasDrawComponent {
   handleStart(ev){
     this.lastX=ev.touches[0].pageX;
     this.lastY=ev.touches[0].pageY;
-    
+    this.drag=1;
+    this.fromMove="N";    
   }
   handleMove(ev){
     this.ctx = this.canvasElement.getContext('2d');
     let CurrentX = ev.touches[0].pageX;
     let CurrentY = ev.touches[0].pageY;
     
+    if (this.drag==1){
+      this.firstX = CurrentX;
+      this.firstY = CurrentY;
+    }
+
+    this.drag++;
+
     this.ctx.beginPath();
-    this.ctx.moveTo(this.lastX-this.ctx.canvas.offsetLeft-2,this.lastY-this.ctx.canvas.offsetTop-2);
-    this.ctx.lineTo(CurrentX-this.ctx.canvas.offsetLeft-2,CurrentY-this.ctx.canvas.offsetTop-2);
+    this.ctx.moveTo(this.lastX-this.ctx.canvas.offsetLeft-2,this.firstY-this.ctx.canvas.offsetTop-2);
+    this.ctx.lineTo(CurrentX-this.ctx.canvas.offsetLeft-2,  this.firstY-this.ctx.canvas.offsetTop-2);
     this.ctx.closePath();
     this.ctx.srtokeStyle='#000';
     this.ctx.lineWidth=5;
@@ -55,9 +68,18 @@ export class CanvasDrawComponent {
 
     this.lastX=CurrentX;
     this.lastY=CurrentY;
+    this.fromMove="Y";
   }
   
   handleEnd(ev){
+    if (this.fromMove=="Y"){
+      this.ctx = this.canvasElement.getContext('2d');
+      this.ctx.beginPath();
+      this.ctx.moveTo(this.lastX-this.ctx.canvas.offsetLeft-2, this.firstY-this.ctx.canvas.offsetTop-2);
+      this.ctx.lineTo(this.lastX+25-this.ctx.canvas.offsetLeft-2, this.firstY-25-this.ctx.canvas.offsetTop-2);
+      this.ctx.lineTo(this.lastX+25-this.ctx.canvas.offsetLeft-2, this.firstY+25-this.ctx.canvas.offsetTop-2);
+      this.ctx.fill();
+    }
   }
 
   saveImage(){

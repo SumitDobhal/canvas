@@ -1,8 +1,14 @@
 <!-- Generated template for the CanvasDrawComponent component -->
+<ion-toolbar>
+    <ion-icon ios="ios-arrow-round-back" md="md-arrow-round-back"></ion-icon>
+    <ion-icon ios="ios-arrow-round-down" md="md-arrow-round-down"></ion-icon>  
+    <ion-icon ios="ios-arrow-round-forward" md="md-arrow-round-forward"></ion-icon>
+    <ion-icon ios="ios-arrow-round-up" md="md-arrow-round-up"></ion-icon>
+</ion-toolbar>
 <canvas #myCanvas   (touchstart)="handleStart($event)" (touchmove)="handleMove($event)" (touchend)="handleEnd($event)"  [ngStyle]="{ 'background-image': 'url(' + imagenew + ')'}" class="canvas-image" >
   
 </canvas>
 
-<ion-toolbar >
-  <button ion-button item-right color="secondary"  (click)="saveImage()" >Save</button>
+<ion-toolbar>
+    <button ion-button item-right color="secondary"  (click)="saveImage()" >Save</button>
 </ion-toolbar>

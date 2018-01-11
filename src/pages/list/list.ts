@@ -13,27 +13,28 @@ import {CanvasDrawComponent} from '../../components/canvas-draw/canvas-draw'
 })
 export class ListPage {
   options:any;
-
+  imageSr:string;
   constructor(public navCtrl: NavController, public navParams: NavParams,private camera: Camera) {
 
     
   }
 
   takePicture(){
-    this.options = {
-      quality: 100,
-      sourceType: this.camera.PictureSourceType.CAMERA,
-      saveToPhotoAlbum: false,
-      correctOrientation: true,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      mediaType: this.camera.MediaType.PICTURE
-    };
-    this.camera.getPicture(this.options)
-    .then((imageData)=>{
+    // this.options = {
+    //   quality: 100,
+    //   sourceType: this.camera.PictureSourceType.CAMERA,
+    //   saveToPhotoAlbum: false,
+    //   correctOrientation: true,
+    //   destinationType: this.camera.DestinationType.DATA_URL,
+    //   mediaType: this.camera.MediaType.PICTURE
+    // };
+    // this.camera.getPicture(this.options)
+    // .then((imageData)=>{
 
-      this.navCtrl.push(CanvasDrawComponent,imageData);
+    //   this.imageSr=imageData;
         
-    });
+    // });
+    this.navCtrl.push(CanvasDrawComponent,this.imageSr);
   }
 
  
